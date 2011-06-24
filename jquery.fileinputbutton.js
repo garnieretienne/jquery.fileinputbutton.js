@@ -22,17 +22,15 @@
     // define button
     wrapper = $('<div class="fileinputbutton">').css({
       'background'       : 'url("'+settings.image+'") no-repeat center center',
-      'position'         : 'relative',
-      'overflow'         : 'hidden',
       'width'            : settings.width,
       'height'           : settings.height,
-      'cursor'           : 'pointer',
+      'cursor'           : 'pointer'
     });
     $this.wrap(wrapper);
 
     // input position
     $this.css({
-      'position'       : 'absolute',
+      'position'       : 'fixed',
       'cursor'         : 'pointer',
       'top'            : '0px',
       'right'          : '0px',
@@ -44,22 +42,33 @@
         'opacity'        : '0', // transparency
         'filter'         : 'alpha(opacity=0)' // transparency for ie < 9
       });
+      $this.parent().css('overflow', 'hidden');
     } else {
       $this.parent().css('background-color', 'grey');
     };
 
+    // find the area
+    var offset = $this.parent().offset();
+    var areaXMin = offset.left;
+    var areaYMin = offset.top;
+    var areaXMax = areaXMin+$this.parent().width();
+    var areaYMax = areaYMin+$this.parent().height();
+
     // move input button under mouse when in a fileinputbutton area
     $this.parent().mousemove(function(e) {
-      var parentWidth = $this.parent().width();
-      var top = this.offsetTop;
-      var left = this.offsetLeft;
-      var ajustTop = -10; // ajust to mouve input browse button under mouse
-      var ajustRight = -20; // ajust to mouve input browse button under mouse
-      var parentPosition = $this.parent().position();
-      $this.css({
-        'top' :  e.pageY - parentPosition.top + ajustTop +'px',
-        'right': parentWidth - (e.pageX - parentPosition.left) + ajustRight +'px'
-      });
+      var ajustTop = 10;
+      var ajustLeft = 30;
+      if ( areaXMin < e.pageX && areaXMax > e.pageX && areaYMin < e.pageY && areaYMax > e.pageY) {
+        $this.css({
+          'z-index' : '100',
+          'top' :  e.pageY-ajustTop+'px',
+          'left': (e.pageX-$this.width())+ajustLeft+'px'
+        });
+      } else {
+        $this.css({
+          'z-index' : '-100',
+        });
+      };
     });
 
   });
