@@ -6,6 +6,8 @@ Use this plugin to style yours input file.
 Usage
 -----
 
+With a picture:
+
 ```javascript
 $('#stylized').fileinputbutton({
   'image'  : 'images/upload_button.png', // your button picture
@@ -13,6 +15,27 @@ $('#stylized').fileinputbutton({
   'height' : '43px',                     // height of the button (px, em or %)
   'debug'  : true                        // show real input file too for debugging purpose, default is false
 });
+```
+With a jquery object
+
+```javascript
+css_button = $('<a href="" title="Send your files">');
+css_button.text('Send your files');
+css_button.css({
+  'display'          : 'block',
+  'text-decoration'  : 'none',
+  'padding'          : '5px',
+  'background-color' : 'green',
+  'text-align'       : 'center',
+  'color'            : 'white'
+});
+
+$('#stylized_div').fileinputbutton({
+  'div'    : css_button,                 // your button jquery object
+  'width'  : '200px',
+  'height' : '43px'
+});
+
 ```
 
 Exemple
