@@ -5,6 +5,7 @@
   // default options
   var settings = {
     'image'  : '',
+    'div'    : null,
     'width'  : '100px',
     'height' : '20px',
     'debug'  : false
@@ -18,14 +19,25 @@
     }
 
     var $this = $(this);
+    var wrapper;
 
     // define button
-    wrapper = $('<div class="fileinputbutton">').css({
-      'background'       : 'url("'+settings.image+'") no-repeat center center',
-      'width'            : settings.width,
-      'height'           : settings.height,
-      'cursor'           : 'pointer'
-    });
+    if (settings.div) {
+      settings.div.attr('id', 'fileinputbutton');
+      settings.div.css({ 
+        'width'  : settings.width,
+        'height' : settings.height,
+        'cursor' : 'pointer'
+      });
+      wrapper = settings.div;
+    } else {
+      wrapper = $('<div class="fileinputbutton">').css({
+        'background'       : 'url("'+settings.image+'") no-repeat center center',
+        'width'            : settings.width,
+        'height'           : settings.height,
+        'cursor'           : 'pointer'
+      });
+    };
     $this.wrap(wrapper);
 
     // input position

@@ -8,8 +8,10 @@
   <form action="" method="post">
     <label>Before:</label> <br />
     <input type="file" name="file1"/> <br />
-    <label>After:</label> <br />
+    <label>After: (with picture)</label> <br />
     <input id='stylized' type="file" name="file1"/> <br />
+    <label>After: (with div)</label> <br />
+    <input id='stylized_div' type="file" name="file1"/> <br />
     <label>Debug Mode:</label> <br />
     <input id='debug' type="file" name="file1"/> <br />
   </form>
@@ -22,6 +24,24 @@
         'width'  : '200px',
         'height' : '43px'
       });
+    
+      css_button = $('<a href="" title="Send your files">');
+      css_button.text('Send your files');
+      css_button.css({
+        'display'          : 'block',
+        'text-decoration'  : 'none',
+        'padding'          : '5px',
+        'background-color' : 'green',
+        'text-align'       : 'center',
+        'color'            : 'white'
+      });
+
+      $('#stylized_div').fileinputbutton({
+        'div'    : css_button,
+        'width'  : '200px',
+        'height' : '43px'
+      });
+    
       $('#debug').fileinputbutton({
         'width'  : '100%',
         'height' : '200px',
